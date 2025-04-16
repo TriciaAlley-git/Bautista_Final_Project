@@ -1,67 +1,158 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: dark; /* Force dark scheme */
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #121212; /* Deep dark background */
-  
-  /* Dark grey accents */
-  --dark-grey: #1e1e1e;
-  --medium-grey: #2d2d2d;
-  --light-grey: #3d3d3d;
-  --accent-color: #646cff;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --primary-color: #7b64ff;
+  --secondary-color: #5e35b1;
+  --dark-bg: #0a0a0a;
+  --light-text: rgba(255, 255, 255, 0.92);
+  --card-bg: rgba(30, 30, 30, 0.8);
+  --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-a {
-  font-weight: 500;
-  color: var(--accent-color);
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+/* Full-screen layout */
+html, body, #root, .portfolio-container {
+  height: 100%;
+  width: 100%;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: var(--dark-grey); /* Dark grey body background */
+  padding: 0;
+  overflow-x: hidden;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Luxury background with particles */
+.bg-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--dark-bg) 0%, #121212 100%);
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: float 15s infinite linear;
+}
+
+/* Main content styling */
+.luxury-portfolio {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  color: var(--light-text);
+}
+
+/* Header with gradient text */
+.portfolio-header h1 {
+  font-size: 4rem;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 3rem;
+}
+
+/* Luxury card styling */
+.luxury-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition-smooth);
+}
+
+.luxury-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(123, 100, 255, 0.2);
+}
+
+/* Timeline styling */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -2.5rem;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  border: 2px solid white;
+}
+
+.institution {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
   color: white;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid var(--medium-grey);
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+.degree {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.25rem;
+}
+
+.duration {
+  color: var(--primary-color);
   font-weight: 500;
-  font-family: inherit;
-  background-color: var(--medium-grey); /* Dark grey buttons */
-  color: white;
-  cursor: pointer;
-  transition: border-color 0.25s, background-color 0.25s;
-}
-button:hover {
-  border-color: var(--accent-color);
-  background-color: var(--light-grey);
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto var(--accent-color);
 }
 
-/* Remove light mode media query since we want always dark */
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+.animate-slideDown {
+  animation: slideDown 1s ease-out forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1.2s ease-out forwards;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .luxury-portfolio {
+    padding: 2rem 1rem;
+  }
+  
+  .portfolio-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .luxury-card {
+    padding: 1.5rem;
+  }
+}
